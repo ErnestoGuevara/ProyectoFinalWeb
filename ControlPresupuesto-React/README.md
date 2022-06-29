@@ -1,6 +1,3 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-## Link Project online: https://brave-clarke-56a53f.netlify.com/
-
 ## Available Scripts
 
 In the project directory, you can run:
