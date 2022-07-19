@@ -1,15 +1,16 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+
 
 function GastosList(props) {
   return (
     <div>
-    <ul id="todos" >
+    <ul id="todos" className="list-group ">
     {
-    props.datos.filter((dato)=>dato.dia.toLowerCase()==props.dia).map((gasto) => (
+    props.datos.filter((dato)=>dato.dia.toLowerCase()===props.dia).map((gasto) => (
 
         <li
         key={gasto._id}
+        className= "list-group-item list-group-item-primary"
         >
         <span>{gasto.gasto}</span>  
         </li>                                       

@@ -3,6 +3,9 @@ const morgan = require("morgan");
 
 const {mongoose}=require("./database")
 const app = express();
+var cors = require('cors')
+
+app.use(cors())
 
 //Settings 
 app.set("port", process.env.PORT || 4000);

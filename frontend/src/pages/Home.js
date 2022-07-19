@@ -9,9 +9,22 @@ import GastosList from '../components/GastosList';
 function Home() {
     useEffect(()=>{
         getData()
+        getPresupuesto()
     },[])
     const [gastos,setGastos] = useState([])
+    const [presupuesto,setPresupuesto] = useState([])
     
+    const getPresupuesto = ()=>{
+        axios.get("http://localhost:4000/api/presupuesto").then(response=>{ 
+        //const filtrado = response.data.filter((dato)=> (dato.dia).toLowerCase() == "viernes").map((gasto)=>console.log(gasto))
+        setPresupuesto(response.data)
+        //console.log(filtrado); 
+    }).catch(err => {
+        // Do something for an error here
+        console.log("Error Reading data " + err);
+      });;
+        
+      }
     const getData= ()=>{
         axios.get("http://localhost:4000/api/gastos/").then(response=>{ 
         //const filtrado = response.data.filter((dato)=> dato.dia == "Martes").map((gasto)=>console.log(gasto))
@@ -22,6 +35,8 @@ function Home() {
         // Do something for an error here
         console.log("Error Reading data " + err);
       });;
+
+      
 
     }
     
@@ -38,7 +53,9 @@ function Home() {
                                 <h3>Lunes</h3>
                             </div>
                             <div className="content">
-                                <p>(Presupuesto en numero)</p> 
+                                {presupuesto.filter((dato)=> (dato.dia).toLowerCase() === "lunes").map((pres)=>(
+                                    <p>Presupuesto: {pres.presupuesto}</p>
+                                ))} 
                                 <GastosList datos={gastos} dia={"Lunes".toLowerCase()}/>
                                 <Link to="/lunes">
                                 <button type="button" className="btn btn-warning">Editar</button>
@@ -52,10 +69,12 @@ function Home() {
                                 <h3>Martes</h3>
                             </div>
                             <div className="content">
-                                <p>(Presupuesto en numero)</p> 
+                            {presupuesto.filter((dato)=> (dato.dia).toLowerCase() === "martes").map((pres)=>(
+                                    <p>Presupuesto: {pres.presupuesto}</p>
+                                ))} 
                                 <GastosList datos={gastos} dia={"Martes".toLowerCase()}/>
                                 <Link to="/martes">
-                                <button type="button" className="btn btn-warning">Editar</button>
+                                <button type="button" className="btn btn-warning" >Editar</button>
                                 </Link>
                             </div>
                     </div>
@@ -65,7 +84,9 @@ function Home() {
                                 <h3>Miercoles</h3>
                             </div>
                             <div className="content">
-                                <p>(Presupuesto en numero)</p> 
+                            {presupuesto.filter((dato)=> (dato.dia).toLowerCase() === "miercoles").map((pres)=>(
+                                    <p>Presupuesto: {pres.presupuesto}</p>
+                                ))} 
                                 <GastosList datos={gastos} dia={"Miercoles".toLowerCase()}/>
                                 <Link to="/miercoles">
                                 <button type="button" className="btn btn-warning">Editar</button>
@@ -78,7 +99,9 @@ function Home() {
                                 <h3>Jueves</h3>
                             </div>
                             <div className="content">
-                                <p>(Presupuesto en numero)</p> 
+                            {presupuesto.filter((dato)=> (dato.dia).toLowerCase() === "jueves").map((pres)=>(
+                                    <p>Presupuesto: {pres.presupuesto}</p>
+                                ))} 
                                 <GastosList datos={gastos} dia={"Jueves".toLowerCase()}/>
                                 <Link to="/jueves">
                                 <button type="button" className="btn btn-warning">Editar</button>
@@ -91,10 +114,12 @@ function Home() {
                                 <h3>Viernes</h3>
                             </div>
                             <div className="content">
-                                <p>(Presupuesto en numero)</p> 
+                            {presupuesto.filter((dato)=> (dato.dia).toLowerCase() === "viernes").map((pres)=>(
+                                    <p>Presupuesto: {pres.presupuesto}</p>
+                                ))} 
                                 <GastosList datos={gastos} dia={"Viernes".toLowerCase()}/>
                                 
-                                <Link to="/lunes">
+                                <Link to="/viernes">
                                 <button type="button" className="btn btn-warning">Editar</button>
                                 </Link>
                             </div>
@@ -105,7 +130,9 @@ function Home() {
                                 <h3>Sabado</h3>
                             </div>
                             <div className="content">
-                                <p>(Presupuesto en numero)</p> 
+                            {presupuesto.filter((dato)=> (dato.dia).toLowerCase() === "sabado").map((pres)=>(
+                                    <p>Presupuesto: {pres.presupuesto}</p>
+                                ))} 
                                 <GastosList datos={gastos} dia={"Sabado".toLowerCase()}/>
                                 <Link to="/sabado">
                                 <button type="button" className="btn btn-warning">Editar</button>
@@ -118,7 +145,9 @@ function Home() {
                                 <h3>Domingo</h3>
                             </div>
                             <div className="content">
-                                <p>(Presupuesto en numero)</p> 
+                            {presupuesto.filter((dato)=> (dato.dia).toLowerCase() === "domingo").map((pres)=>(
+                                    <p>Presupuesto: {pres.presupuesto}</p>
+                                ))} 
                                 <GastosList datos={gastos} dia={"Domingo".toLowerCase()}/>
                                 
                                 <Link to="/domingo">
