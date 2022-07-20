@@ -6,11 +6,11 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 function GastoList2(props) {
-    
     useEffect(()=>{
-        getData()
+        props.func()
     },[])
-    const [gastos,setGastos] = useState([])
+   
+    
     const [gastoChar,setGastoChar] = useState("")
     const [cantidadChar,setCantidadChar] = useState("")
     const [idChar,setIdChar] = useState("")
@@ -53,7 +53,7 @@ function GastoList2(props) {
                 text: 'Se ha editado el gasto con exito',
               })
               handleClose()
-              getData()
+              props.func()
 
         })
         .catch(error => {     
@@ -78,7 +78,7 @@ function GastoList2(props) {
                     `Gasto eliminado`,
                     'success'
                   )
-                getData()
+                props.func()
                 }).catch(error => {
                     
                     console.error('There was an error!', error);
@@ -86,22 +86,11 @@ function GastoList2(props) {
               
             }
           })
+          
 
     }
     
-    const getData= ()=>{
-        axios.get("http://localhost:4000/api/gastos/").then(response=>{ 
-        //const filtrado = response.data.filter((dato)=> dato.dia == props.dia).map((gasto)=>console.log(gasto))
-        setGastos(response.data)
-        //setGastos(response.data)
-        //console.log(response.data); 
-    }).catch(err => {
-        // Do something for an error here
-        console.log("Error Reading data " + err);
-      });
-     
-     
-    }
+
   return (
     <div className='container' style={{marginTop: "20px"}}>
         
@@ -112,7 +101,7 @@ function GastoList2(props) {
         <div className="card-body">     
         <ul id="todos" className="list-group">
         {
-        gastos.filter((dato)=>dato.dia.toLowerCase()===props.dia).map((gasto) => (
+        props.data.filter((dato)=>dato.dia.toLowerCase()===props.dia).map((gasto) => (
 
         <li
         key={gasto._id}

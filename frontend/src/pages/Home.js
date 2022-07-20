@@ -54,7 +54,8 @@ function Home() {
                             </div>
                             <div className="content">
                                 {presupuesto.filter((dato)=> (dato.dia).toLowerCase() === "lunes").map((pres)=>(
-                                    <p>Presupuesto: {pres.presupuesto}</p>
+                                    <p>Presupuesto:<span>$</span>{pres.presupuesto}</p>
+                                    
                                 ))} 
                                 <GastosList datos={gastos} dia={"Lunes".toLowerCase()}/>
                                 <Link to="/lunes">
@@ -70,7 +71,7 @@ function Home() {
                             </div>
                             <div className="content">
                             {presupuesto.filter((dato)=> (dato.dia).toLowerCase() === "martes").map((pres)=>(
-                                    <p>Presupuesto: {pres.presupuesto}</p>
+                                    <p>Presupuesto: <span>$</span>{pres.presupuesto}</p>
                                 ))} 
                                 <GastosList datos={gastos} dia={"Martes".toLowerCase()}/>
                                 <Link to="/martes">
@@ -85,7 +86,7 @@ function Home() {
                             </div>
                             <div className="content">
                             {presupuesto.filter((dato)=> (dato.dia).toLowerCase() === "miercoles").map((pres)=>(
-                                    <p>Presupuesto: {pres.presupuesto}</p>
+                                    <p>Presupuesto: <span>$</span>{pres.presupuesto}</p>
                                 ))} 
                                 <GastosList datos={gastos} dia={"Miercoles".toLowerCase()}/>
                                 <Link to="/miercoles">
@@ -100,7 +101,7 @@ function Home() {
                             </div>
                             <div className="content">
                             {presupuesto.filter((dato)=> (dato.dia).toLowerCase() === "jueves").map((pres)=>(
-                                    <p>Presupuesto: {pres.presupuesto}</p>
+                                    <p>Presupuesto: <span>$</span>{pres.presupuesto}</p>
                                 ))} 
                                 <GastosList datos={gastos} dia={"Jueves".toLowerCase()}/>
                                 <Link to="/jueves">
@@ -115,7 +116,7 @@ function Home() {
                             </div>
                             <div className="content">
                             {presupuesto.filter((dato)=> (dato.dia).toLowerCase() === "viernes").map((pres)=>(
-                                    <p>Presupuesto: {pres.presupuesto}</p>
+                                    <p>Presupuesto: <span>$</span>{pres.presupuesto}</p>
                                 ))} 
                                 <GastosList datos={gastos} dia={"Viernes".toLowerCase()}/>
                                 
@@ -131,7 +132,7 @@ function Home() {
                             </div>
                             <div className="content">
                             {presupuesto.filter((dato)=> (dato.dia).toLowerCase() === "sabado").map((pres)=>(
-                                    <p>Presupuesto: {pres.presupuesto}</p>
+                                    <p>Presupuesto:<span>$</span> {pres.presupuesto}</p>
                                 ))} 
                                 <GastosList datos={gastos} dia={"Sabado".toLowerCase()}/>
                                 <Link to="/sabado">
@@ -146,7 +147,7 @@ function Home() {
                             </div>
                             <div className="content">
                             {presupuesto.filter((dato)=> (dato.dia).toLowerCase() === "domingo").map((pres)=>(
-                                    <p>Presupuesto: {pres.presupuesto}</p>
+                                    <p>Presupuesto:<span>$</span> {pres.presupuesto}</p>
                                 ))} 
                                 <GastosList datos={gastos} dia={"Domingo".toLowerCase()}/>
                                 
