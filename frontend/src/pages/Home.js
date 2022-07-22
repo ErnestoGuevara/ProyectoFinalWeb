@@ -15,7 +15,7 @@ function Home() {
     const [presupuesto,setPresupuesto] = useState([])
     
     const getPresupuesto = ()=>{
-        axios.get("http://localhost:4000/api/presupuesto").then(response=>{ 
+        axios.get("https://murmuring-stream-02725.herokuapp.com/api/presupuesto").then(response=>{ 
         //const filtrado = response.data.filter((dato)=> (dato.dia).toLowerCase() == "viernes").map((gasto)=>console.log(gasto))
         setPresupuesto(response.data)
         //console.log(filtrado); 
@@ -26,7 +26,7 @@ function Home() {
         
       }
     const getData= ()=>{
-        axios.get("http://localhost:4000/api/gastos/").then(response=>{ 
+        axios.get("https://murmuring-stream-02725.herokuapp.com/api/gastos").then(response=>{ 
         //const filtrado = response.data.filter((dato)=> dato.dia == "Martes").map((gasto)=>console.log(gasto))
         setGastos(response.data)
         //setGastos(response.data)

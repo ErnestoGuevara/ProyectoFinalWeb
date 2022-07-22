@@ -23,7 +23,7 @@ function GastoList2(props) {
         'My-Custom-Header': 'foobar'
     };
     function editGasto(id){
-        axios.get(`http://localhost:4000/api/gastos/${id}`).then(response=>{ 
+        axios.get(`https://murmuring-stream-02725.herokuapp.com/api/gastos/${id}`).then(response=>{ 
         setGastoChar(response.data.gasto)
         setCantidadChar(response.data.cantidad)
         setIdChar(response.data._id)
@@ -42,7 +42,7 @@ function GastoList2(props) {
         setCantidadChar(e.target.value)   
     }
     function saveChanges(id){
-        axios.put(`http://localhost:4000/api/gastos/edit/${id}`,{
+        axios.put(`https://murmuring-stream-02725.herokuapp.com/api/gastos/edit/${id}`,{
             gasto:gastoChar,
             cantidad:cantidadChar,
             dia: props.dia
@@ -72,7 +72,7 @@ function GastoList2(props) {
             cancelButtonText: 'Cancelar'
           }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:4000/api/gastos/delete/${id}`,{headers})
+                axios.delete(`https://murmuring-stream-02725.herokuapp.com/api/gastos/delete/${id}`,{headers})
                 .then(response => {Swal.fire(
                     'Eliminado',
                     `Gasto eliminado`,

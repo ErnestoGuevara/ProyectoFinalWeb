@@ -43,7 +43,7 @@ function Formulario(props) {
             cancelButtonText: 'Cancelar'
           }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:4000/api/presupuesto/delete/${id}`,{headers})
+                axios.delete(`https://murmuring-stream-02725.herokuapp.com/api/presupuesto/delete/${id}`,{headers})
                 .then(response => {Swal.fire(
                     'Eliminado',
                     `Presupuesto eliminado`,
@@ -61,7 +61,7 @@ function Formulario(props) {
           
     const getPresupuestoBdd = ()=>{
         let presupuestoBool = false
-        axios.get("http://localhost:4000/api/presupuesto").then(response=>{ 
+        axios.get("https://murmuring-stream-02725.herokuapp.com/api/presupuesto").then(response=>{ 
         const filtrado = response.data.filter((dato)=> (dato.dia).toLowerCase() == props.dia.toLowerCase()).map((pres)=>{
           setPresupuestoBien(pres.presupuesto)
           presupuestoBool = true
@@ -96,7 +96,7 @@ function Formulario(props) {
         //console.log(e.target.value);
     }
     const addPresupuesto=()=>{
-        axios.post("http://localhost:4000/api/presupuesto/add",{
+        axios.post("https://murmuring-stream-02725.herokuapp.com/api/presupuesto/add",{
                     presupuesto:newPresupuesto,
                     dia:props.dia
                 }).then(function (response) {
@@ -117,7 +117,7 @@ function Formulario(props) {
                     text: "Cantidad de gasto mayor a presupuesto."
                 })
             }else{
-                    axios.post("http://localhost:4000/api/gastos/add",{
+                    axios.post("https://murmuring-stream-02725.herokuapp.com/api/gastos/add",{
                         gasto:newGasto,
                         cantidad:newCantidad,
                         dia:props.dia
@@ -144,7 +144,7 @@ function Formulario(props) {
          
     }
     const getData= ()=>{
-        axios.get("http://localhost:4000/api/gastos/").then(response=>{ 
+        axios.get("https://murmuring-stream-02725.herokuapp.com/api/gastos").then(response=>{ 
         const filtrado = response.data.filter((dato)=> (dato.dia).toLowerCase() == (props.dia).toLowerCase()).map((gasto)=>gasto.cantidad)
         const sumaTtoal = filtrado.reduce((prev, curr) => prev + curr, 0);
         setCantidadTotal(sumaTtoal)
