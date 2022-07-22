@@ -60,11 +60,15 @@ function Formulario(props) {
         }
           
     const getPresupuestoBdd = ()=>{
+        let presupuestoBool = false
         axios.get("http://localhost:4000/api/presupuesto").then(response=>{ 
-        const filtrado = response.data.filter((dato)=> (dato.dia).toLowerCase() == props.dia.toLowerCase()).map((pres)=>setPresupuestoBien(pres.presupuesto))
+        const filtrado = response.data.filter((dato)=> (dato.dia).toLowerCase() == props.dia.toLowerCase()).map((pres)=>{
+          setPresupuestoBien(pres.presupuesto)
+          presupuestoBool = true
+        })
         
-        console.log(presupuestoBien);
-        if (presupuestoBien>0){
+        //console.log(presupuestoBien);
+        if (presupuestoBool){
             handleClose()
         }
         else{
