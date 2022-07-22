@@ -108,7 +108,7 @@ function GastoList2(props) {
         className="list-group-item d-flex justify-content-between align-items-center"
         >
         <span>{gasto.gasto} ${gasto.cantidad}</span>
-        <span></span>
+        
         <div>
         <button className="btn btn-primary btn-sm rounded-0" type="button"  title="Edit" style={{marginRight:"10px"}} onClick={()=> editGasto(gasto._id)}><i className="bi bi-pencil-fill"></i></button>
         <button className="btn btn-danger btn-sm rounded-0" type="button"  title="Delete" onClick={()=> deleteGasto(gasto._id)}><i className="bi bi-trash3-fill" ></i></button>

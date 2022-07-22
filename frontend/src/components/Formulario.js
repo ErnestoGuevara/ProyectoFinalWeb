@@ -2,20 +2,34 @@ import React,{useEffect,useState}  from 'react'
 import GastoList2 from './GastoList2'
 import axios from 'axios'
 import Swal from 'sweetalert2'
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
 function Formulario(props) {
+    
     useEffect(()=>{
         getData()
         getPresupuestoBdd()
+                
     },[])
+
+    
     const [gastos,setGastos] = useState([])
     const [presupuesto,setPresupuesto] = useState([])
     const [newPresupuesto,setNewPresupuesto] = useState(0)
     const [newGasto, setNewGasto]=useState("")
     const [newCantidad,setNewCantidad] = useState(0)
+    const [presupuestoBien,setPresupuestoBien]= useState()
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [show, setShow] = useState(false);
+    const [cantidadTotal,setCantidadTotal] = useState()
     const headers = { 
         'Authorization': 'Bearer my-token',
         'My-Custom-Header': 'foobar'
     };
+  
+    
     
     function deletePresupuesto(id){
         Swal.fire({
@@ -47,7 +61,15 @@ function Formulario(props) {
           
     const getPresupuestoBdd = ()=>{
         axios.get("http://localhost:4000/api/presupuesto").then(response=>{ 
-        //const filtrado = response.data.filter((dato)=> (dato.dia).toLowerCase() == "viernes").map((gasto)=>console.log(gasto))
+        const filtrado = response.data.filter((dato)=> (dato.dia).toLowerCase() == props.dia.toLowerCase()).map((pres)=>setPresupuestoBien(pres.presupuesto))
+        
+        console.log(presupuestoBien);
+        if (presupuestoBien>0){
+            handleClose()
+        }
+        else{
+            handleShow()
+        }
         setPresupuesto(response.data)
         //console.log(filtrado); 
     }).catch(err => {
@@ -59,7 +81,7 @@ function Formulario(props) {
     
     function getPresupuesto(e){
         setNewPresupuesto(e.target.value)
-        console.log(e.target.value);
+        //console.log(e.target.value);
     }
     function getGasto(e){
         setNewGasto(e.target.value)
@@ -69,39 +91,48 @@ function Formulario(props) {
         setNewCantidad(e.target.value)
         //console.log(e.target.value);
     }
-    const addData=()=>{
-        if( newPresupuesto <= 0 || newCantidad<=0 || newGasto===""){
-            Swal.fire({
-                icon: 'error',
-                title: 'Campos vacios o incorrectos',
-                text: 'Debes llenar todos los campos',
-              })
-        }else{
-            axios.post("http://localhost:4000/api/presupuesto/add",{
-                presupuesto:newPresupuesto,
-                dia:props.dia
-            }).then(function (response) {
-    
-                axios.post("http://localhost:4000/api/gastos/add",{
-                    gasto:newGasto,
-                    cantidad:newCantidad,
+    const addPresupuesto=()=>{
+        axios.post("http://localhost:4000/api/presupuesto/add",{
+                    presupuesto:newPresupuesto,
                     dia:props.dia
                 }).then(function (response) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Añadido exitoso',
-                        text: 'Se ha agregado el gasto con exito',
-                      })
-                    getData()
+                    //console.log(response);
+                    handleClose()
+                    getPresupuestoBdd()
+                })
+                .catch(function (error) {
+                  console.log(error);
+                });
+    }
+    const addData=()=>{
+        
+            if(presupuestoBien<newCantidad ){
+                Swal.fire({
+                    icon: 'error',
+                    title: "Error",
+                    text: "Cantidad de gasto mayor a presupuesto."
+                })
+            }else{
+                    axios.post("http://localhost:4000/api/gastos/add",{
+                        gasto:newGasto,
+                        cantidad:newCantidad,
+                        dia:props.dia
+                    }).then(function (response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Añadido exitoso',
+                            text: 'Se ha agregado el gasto con exito',
+                          })
+                        getData()
+                        
+                    //console.log(response);
                   })
                   .catch(function (error) {
                     console.log(error);
                   });
-                console.log(response);
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
+
+            
+           
         }
        
        
@@ -110,7 +141,10 @@ function Formulario(props) {
     }
     const getData= ()=>{
         axios.get("http://localhost:4000/api/gastos/").then(response=>{ 
-        //const filtrado = response.data.filter((dato)=> dato.dia == props.dia).map((gasto)=>console.log(gasto))
+        const filtrado = response.data.filter((dato)=> (dato.dia).toLowerCase() == (props.dia).toLowerCase()).map((gasto)=>gasto.cantidad)
+        const sumaTtoal = filtrado.reduce((prev, curr) => prev + curr, 0);
+        setCantidadTotal(sumaTtoal)
+        
         setGastos(response.data)
         //setGastos(response.data)
         //console.log(response.data); 
@@ -122,6 +156,37 @@ function Formulario(props) {
 
   return (
     <div className='container'>
+        <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Añadir presupuesto</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+               
+    <form>
+      <div className="form-group">
+      <label>Presupuesto: </label>
+        <input
+          type="text"
+          placeholder="Agrega tu presupuesto (Ej. 500)"
+          id="new-presupuesto"
+          className="form-control"
+          onChange={getPresupuesto}
+          
+        />
+       
+      </div>
+      </form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cerrar
+          </Button>
+          <Button variant="primary" onClick={()=>addPresupuesto()}>
+            Guardar Presupuesto
+          </Button>
+        </Modal.Footer>
+      </Modal>
+        
         <h2 style={{textAlign: "center", margin:"20px"}}> {(props.dia).toUpperCase()}</h2>
     
     <div className="card">
@@ -131,15 +196,7 @@ function Formulario(props) {
     <div className="card-body">      
     <form>
       <div className="form-group">
-        <label>Presupuesto: </label>
-        <input
-          type="text"
-          placeholder="Agrega tu presupuesto (Ej. 500)"
-          id="new-presupuesto"
-          className="form-control"
-          onChange={getPresupuesto}
-          
-        />
+       
         <label>Gasto: </label>
         <input
           type="text"
@@ -173,11 +230,13 @@ function Formulario(props) {
         </button>
         {presupuesto.filter((dato)=> (dato.dia).toLowerCase() === (props.dia).toLowerCase()).map((pres)=>(
                 <div className='d-flex justify-content-around align-items-center'>
-                    <p>Presupuesto: <span>$</span>{pres.presupuesto}</p>
+                    <p>Presupuesto: <span>$</span>{presupuestoBien}</p>
                     <button className="btn btn-danger btn-sm rounded-0" type="button"  title="Delete" onClick={()=> deletePresupuesto(pres._id)}><i className="bi bi-trash3-fill" ></i></button>
 
                 </div>
         ))} 
+        <p>Cantidad Total: {cantidadTotal}</p>
+        <p>Presupuesto Restante: {presupuestoBien-cantidadTotal}</p>
         </div>
       </div>
       </div>

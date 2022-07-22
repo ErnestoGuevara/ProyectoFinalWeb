@@ -1,5 +1,5 @@
 const express= require("express");
-const morgan = require("morgan");
+
 
 const {mongoose}=require("./database")
 const app = express();
@@ -10,7 +10,7 @@ app.use(cors())
 //Settings 
 app.set("port", process.env.PORT || 4000);
 //Middlewares
-app.use(morgan("dev"));
+
 app.use(express.json());
 
 //Routes
