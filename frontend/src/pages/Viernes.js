@@ -1,18 +1,15 @@
-import React from 'react'
-import Formulario from '../components/Formulario'
-import NavBar from '../components/NavBar'
-
+import React from "react";
+import Formulario from "../components/Formulario";
+import NavBar from "../components/NavBar";
 
 function Viernes() {
   return (
     <div>
-         <NavBar/>
+      <NavBar />
 
-      <Formulario dia= "Viernes"/>
-     
-
+      <Formulario dia="Viernes" />
     </div>
   )
 }
 
-export default Viernes
+export default Viernes;

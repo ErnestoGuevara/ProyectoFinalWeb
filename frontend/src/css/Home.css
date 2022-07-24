@@ -1,73 +1,69 @@
+.contenedor {
+  background-color: #426a75;
+}
 
-.contenedor{
-    background-color: #426A75;
-  }
-  .contenedor h2{
-    text-align: center;
-    color: white;
-  }
-  
-    .contenedor-cards{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    
-    }
-    
-    .container2{
-      position: relative;
-      width: 1100px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .container2 .card{
-      position: relative;
-      max-width: 300px;
-      height: 215px;
-      /*background: #f5f5dc;*/
-      background-color: #d4eff7;
-      margin: 30px 10px;
-      padding: 20px 15px;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 5px 202px rgba(0,0,0,0.5);
-      transition: 0.3s ease-in-out;
-      
-    }
-    .container2 .card:hover{
-      height: 420px;
-    }
-    
-    .container2 .card .imgBx{
-        text-align: center;
-      width: 260px;
-      height: 160px;
-     
-      
-    }
-    
-    
-    
-    .container2 .card .content{
-      position: relative;
-      margin-top: -140px;
-      padding: 10px 15px;
-      text-align: center;
-      color: #111;
-      visibility: hidden;
-      opacity: 0;
-      transition: 0.3s ease-in-out;
-    }
-    
-    .container2 .card:hover .content{
-      visibility: visible;
-      opacity: 1;
-      margin-top: -40px;
-      transition-delay: 0.3s;
-    }
+.contenedor h2 {
+  text-align: center;
+  color: white;
+}
 
-    .content button{
-        margin-top: 20px;
-    }
+.contenedor-cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container2 {
+  position: relative;
+  width: 1100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.container2 .card {
+  position: relative;
+  max-width: 300px;
+  height: 215px;
+  /*background: #f5f5dc;*/
+  background-color: #d4eff7;
+  margin: 30px 10px;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 5px 202px rgba(0, 0, 0, 0.5);
+  transition: 0.3s ease-in-out;
+}
+
+.container2 .card:hover {
+  height: 420px;
+}
+
+.container2 .card .imgBx {
+  text-align: center;
+  width: 260px;
+  height: 160px;
+}
+
+.container2 .card .content {
+  position: relative;
+  margin-top: -140px;
+  padding: 10px 15px;
+  text-align: center;
+  color: #111;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s ease-in-out;
+}
+
+.container2 .card:hover .content {
+  visibility: visible;
+  opacity: 1;
+  margin-top: -40px;
+  transition-delay: 0.3s;
+}
+
+.content button {
+  margin-top: 20px;
+}
