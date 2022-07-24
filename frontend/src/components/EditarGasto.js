@@ -4,7 +4,7 @@ import Swal from "sweetalert2"
 import Button from "react-bootstrap/Button"
 import Modal from "react-bootstrap/Modal"
 
-function GastoList2(props) {
+function EditarGasto(props) {
 
   // This hook, runs the function to get the expenses when the page load
   useEffect(() => {
@@ -188,4 +188,4 @@ function GastoList2(props) {
   )
 }
 
-export default GastoList2;
+export default EditarGasto;

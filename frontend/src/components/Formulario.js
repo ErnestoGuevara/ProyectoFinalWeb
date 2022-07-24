@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react"
-import GastoList2 from "./GastoList2"
+import EditarGasto from "./EditarGasto"
 import axios from "axios"
 import Swal from "sweetalert2"
 import Button from "react-bootstrap/Button"
@@ -273,7 +273,7 @@ function Formulario(props) {
         </div>
       </div>
       {/* Send the day, expenses and the function to get the expenses to the "GastosLis2" component */}
-      <GastoList2 dia={props.dia.toLowerCase()} data={gastos} func={getData} />
+      <EditarGasto dia={props.dia.toLowerCase()} data={gastos} func={getData} />
     </div>
   );
 }
