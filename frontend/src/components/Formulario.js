@@ -19,11 +19,13 @@ function Formulario(props) {
   const [newPresupuesto, setNewPresupuesto] = useState(0)
   const [newGasto, setNewGasto] = useState("")
   const [newCantidad, setNewCantidad] = useState(0)
-  const [presupuestoBien, setPresupuestoBien] = useState()
+  const [presupuestoBien, setPresupuestoBien] = useState(0)
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
   const [show, setShow] = useState(false)
   const [cantidadTotal, setCantidadTotal] = useState()
+  const [presChar, setPresupuestoChar] = useState("")
+  const [idPresChar, setIdPresChar] = useState("")
   let classPresRes = ""
   const headers = {
     Authorization: "Bearer my-token",
@@ -44,6 +46,22 @@ function Formulario(props) {
     classPresRes = "alert alert-danger"
   }
   
+  //Function to edit budget
+  function editPresupuesto(id){
+    // Get the expense from an ID 
+    axios.get(`https://murmuring-stream-02725.herokuapp.com/api/presupuesto/${id}`).then((response) => {
+      // The response is the total expense JSON format, so it can be separated by expense, amount and ID.
+      setPresupuestoChar(response.data.presupuesto)
+      setIdPresChar(response.data._id)
+      
+    })
+    .catch((err) => {
+      // Do something for an error here
+      console.log("Error Reading data " + err)
+    })
+    // Show the success transaction
+    handleShow()
+  }
 
   // Function to delete the budget with the ID
   function deletePresupuesto(id) {
@@ -64,6 +82,8 @@ function Formulario(props) {
           .then((response) => {
             // Animation for budget deleted and update the budget from the DB
             Swal.fire("Eliminado", `Presupuesto eliminado`, "success");
+            setIdPresChar("");
+            setPresupuestoBien(0);
             getPresupuestoBdd();
           })
           .catch((error) => {
@@ -120,7 +140,31 @@ function Formulario(props) {
   // Variable that has a function to add a new Budget
   const addPresupuesto = () => {
     // Post the new budget in the DB
-    axios.post("https://murmuring-stream-02725.herokuapp.com/api/presupuesto/add",
+    
+    if(idPresChar){
+      // Update the expense in the DB
+    axios.put(`https://murmuring-stream-02725.herokuapp.com/api/presupuesto/edit/${idPresChar}`,
+    {
+      presupuesto: newPresupuesto,
+      dia: props.dia
+    }
+  )
+  .then((response) => {
+    Swal.fire({
+      icon: "success",
+      title: "Edición exitosa",
+      text: "Se ha editado el presupuesto con exito",
+    })
+    // Function to get expense
+    handleClose()
+    getPresupuestoBdd()
+  })
+  .catch((error) => {
+    console.error("There was an error!", error)
+  })
+    }
+    else{
+      axios.post("https://murmuring-stream-02725.herokuapp.com/api/presupuesto/add",
       {
         presupuesto: newPresupuesto,
         dia: props.dia,
@@ -134,6 +178,7 @@ function Formulario(props) {
     .catch(function (error) {
       console.log(error)
     })
+    }
   }
 
   // Variable that contains a function to add expenses 
@@ -146,6 +191,13 @@ function Formulario(props) {
         text: "Cantidad de gasto mayor a presupuesto.",
       });
     } 
+    if ((newCantidad === "" || newGasto === "")||(newCantidad === "" && newGasto === "")){
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Campos vacíos, favor de llenar los campos necesarios",
+      });
+    }
     // If is not greater, add the expense to the DB
     else {
       axios.post("https://murmuring-stream-02725.herokuapp.com/api/gastos/add", {
@@ -272,6 +324,17 @@ function Formulario(props) {
                   <p>
                     Presupuesto: <span>${presupuestoBien}</span>
                   </p>
+                  <div>
+                  <button
+                    className="btn btn-primary btn-sm rounded-0"
+                    type="button"
+                    title="Edit"
+                    style={{ marginRight: "10px" }}
+                    onClick={() => editPresupuesto(pres._id)}
+                  
+                  >
+                    <i className="bi bi-pencil-fill"></i>
+                  </button>
                   {/* When you click, the "deletePresupuesto" function delete the budget from the DB */}
                   <button
                     className="btn btn-danger btn-sm rounded-0"
@@ -280,7 +343,7 @@ function Formulario(props) {
                     onClick={() => deletePresupuesto(pres._id)}
                   >
                   <i className="bi bi-trash3-fill"></i>
-                  </button>
+                  </button></div>
                 </div>
               ))}
               <div className="d-flex justify-content-center align-items-center flex-column">
