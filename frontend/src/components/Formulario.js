@@ -100,7 +100,7 @@ function Formulario(props) {
     // Request to all budgets from the DB
     axios.get("https://murmuring-stream-02725.herokuapp.com/api/presupuesto").then((response) => {
       // Information filter to only get the budget of the specific day
-      const filtrado = response.data.filter((dato) => dato.dia.toLowerCase() == props.dia.toLowerCase()).map((pres) => {
+      const filtrado = response.data.filter((dato) => dato.dia.toLowerCase() === props.dia.toLowerCase()).map((pres) => {
         // Update the budget to the "presupuestoBien" use state variable
         setPresupuestoBien(pres.presupuesto)
         presupuestoBool = true
@@ -228,7 +228,7 @@ function Formulario(props) {
       .then((response) => {
         // Filter the expense by day and get the exact amount
         const filtrado = response.data
-          .filter((dato) => dato.dia.toLowerCase() == props.dia.toLowerCase())
+          .filter((dato) => dato.dia.toLowerCase() === props.dia.toLowerCase())
           .map((gasto) => gasto.cantidad)
         // Reduce the budget by the total amount of expenses
         const sumaTotal = filtrado.reduce((prev, curr) => prev + curr, 0)

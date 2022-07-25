@@ -1,5 +1,5 @@
 .contenedor {
-  background-color: #426a75;
+  background-color: #6dafc2;
 }
 
 .contenedor h2 {
@@ -32,7 +32,7 @@
   padding: 20px 15px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 5px 202px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 5px 20px rgba(106, 223, 245, 0.5);
   transition: 0.3s ease-in-out;
 }
 

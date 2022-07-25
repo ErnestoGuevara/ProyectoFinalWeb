@@ -2,7 +2,7 @@ import React from "react";
 
 function NavBar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark" style={{backgroundColor: "#657275"}}>
       <div className="container-fluid">
         <button
           className="navbar-toggler collapsed"
