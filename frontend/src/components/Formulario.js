@@ -24,10 +24,26 @@ function Formulario(props) {
   const handleShow = () => setShow(true)
   const [show, setShow] = useState(false)
   const [cantidadTotal, setCantidadTotal] = useState()
+  let classPresRes = ""
   const headers = {
     Authorization: "Bearer my-token",
     "My-Custom-Header": "foobar",
   }
+  let presupuestoRes = presupuestoBien - cantidadTotal
+  
+  if (presupuestoRes > presupuestoBien/2){
+   
+    classPresRes= "alert alert-success"
+  }
+  if (presupuestoRes <= presupuestoBien/2){
+    
+    classPresRes = "alert alert-warning"
+  }
+  if (presupuestoRes <= 0){
+
+    classPresRes = "alert alert-danger"
+  }
+  
 
   // Function to delete the budget with the ID
   function deletePresupuesto(id) {
@@ -267,8 +283,10 @@ function Formulario(props) {
                   </button>
                 </div>
               ))}
-            <p>Cantidad Total: {cantidadTotal}</p>
-            <p>Presupuesto Restante: {presupuestoBien - cantidadTotal}</p>
+              <div className="d-flex justify-content-center align-items-center flex-column">
+              <p>Cantidad Total de Gastos: ${cantidadTotal}</p>
+              <p className={classPresRes}>Presupuesto Restante: ${presupuestoRes}</p>
+            </div>
           </div>
         </div>
       </div>
