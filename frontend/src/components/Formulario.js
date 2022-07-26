@@ -4,6 +4,7 @@ import axios from "axios"
 import Swal from "sweetalert2"
 import Button from "react-bootstrap/Button"
 import Modal from "react-bootstrap/Modal"
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 function Formulario(props) {
   
@@ -27,6 +28,7 @@ function Formulario(props) {
   const [presChar, setPresupuestoChar] = useState("")
   const [idPresChar, setIdPresChar] = useState("")
   let classPresRes = ""
+  let variant=""
   const headers = {
     Authorization: "Bearer my-token",
     "My-Custom-Header": "foobar",
@@ -34,17 +36,18 @@ function Formulario(props) {
   let presupuestoRes = presupuestoBien - cantidadTotal
   
   if (presupuestoRes > presupuestoBien/2){
-   
+    variant="success"
     classPresRes= "alert alert-success"
   }
   if (presupuestoRes <= presupuestoBien/2){
-    
+    variant="warning"
     classPresRes = "alert alert-warning"
   }
   if (presupuestoRes <= 0){
-
+    variant="danger"
     classPresRes = "alert alert-danger"
   }
+  let porcentajeGastado= (((presupuestoRes)/presupuestoBien)*100).toFixed(2)
   
   //Function to edit budget
   function editPresupuesto(id){
@@ -350,6 +353,8 @@ function Formulario(props) {
               <p>Cantidad Total de Gastos: ${cantidadTotal}</p>
               <p className={classPresRes}>Presupuesto Restante: ${presupuestoRes}</p>
             </div>
+            <ProgressBar striped variant={variant} now={porcentajeGastado} label={`${porcentajeGastado}%`} />
+
           </div>
         </div>
       </div>
