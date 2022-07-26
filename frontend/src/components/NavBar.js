@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function NavBar() {
   return (
@@ -18,63 +19,51 @@ function NavBar() {
         <div className="navbar-collapse collapse" id="navbarColor01">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 ">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/">
-                Home
-              </a>
+            <Link to="/" className="nav-link active" aria-current="page">
+                Calendario
+              </Link>
             </li>
 
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/lunes">
+            <Link to="/lunes" className="nav-link active" aria-current="page">
                 Lunes
-              </a>
+              </Link>
             </li>
 
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/martes">
+            <Link to="/martes" className="nav-link active" aria-current="page">
                 Martes
-              </a>
+              </Link>
             </li>
 
             <li className="nav-item">
-              <a
-                className="nav-link active"
-                aria-current="page"
-                href="/miercoles"
-              >
+            <Link to="/miercoles" className="nav-link active" aria-current="page">
                 Miercoles
-              </a>
+              </Link>
             </li>
 
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/jueves">
+            <Link to="/jueves" className="nav-link active" aria-current="page">
                 Jueves
-              </a>
+              </Link>
             </li>
 
             <li className="nav-item">
-              <a
-                className="nav-link active"
-                aria-current="page"
-                href="/viernes"
-              >
+            <Link to="/viernes" className="nav-link active" aria-current="page">
                 Viernes
-              </a>
+              </Link>
             </li>
 
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/sabado">
+            <Link to="/sabado" className="nav-link active" aria-current="page">
                 Sabado
-              </a>
+              </Link>
             </li>
 
             <li className="nav-item">
-              <a
-                className="nav-link active"
-                aria-current="page"
-                href="/domingo"
-              >
+            <Link to="/domingo" className="nav-link active" aria-current="page">
                 Domingo
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
