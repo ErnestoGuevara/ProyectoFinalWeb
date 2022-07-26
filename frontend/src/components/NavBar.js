@@ -38,7 +38,7 @@ function NavBar() {
 
             <li className="nav-item">
             <Link to="/miercoles" className="nav-link active" aria-current="page">
-                Miercoles
+                Miércoles
               </Link>
             </li>
 
@@ -56,7 +56,7 @@ function NavBar() {
 
             <li className="nav-item">
             <Link to="/sabado" className="nav-link active" aria-current="page">
-                Sabado
+                Sábado
               </Link>
             </li>
 

@@ -94,7 +94,7 @@ function Home() {
 
           <div className="card">
             <div className="imgBx">
-              <h3>Miercoles</h3>
+              <h3>Miércoles</h3>
             </div>
             <div className="content">
               {/* According to the state variable "presupuesto", it filters by day to get the budget */}
@@ -163,7 +163,7 @@ function Home() {
 
           <div className="card">
             <div className="imgBx">
-              <h3>Sabado</h3>
+              <h3>Sábado</h3>
             </div>
             <div className="content">
               {/* According to the state variable "presupuesto", it filters by day to get the budget */}
